@@ -46,38 +46,7 @@ You can visit the app by going to `http://localhost:3000`.
 
 ### Diagram
 
-<div hidden>
-
-```
-@startuml firstDiagram
-'https://plantuml.com/sequence-diagram
-
-autonumber
-
-participant controller
-participant CreatePost
-participant "Post static" as Post
-participant "Post instance" as post
-participant "Comments static" as Comments
-participant "Comments instance" as comments
-participant _domainEvents
-participant DomainEvents
-participant markedAggregates
-
-controller -> CreatePost: execute(req: CreatePostDTO)
-CreatePost --> Post: create(postProps: PostProps)
-Post --> Comments: create()
-Comments --> Comments:new()
-Post --> Post:new()
-Post --> post:addDomainEvent(event: PostCreated)
-post --> _domainEvents:push(event: IDomainEvent)
-post --> DomainEvents:markAggregateForDispatch(post: Post)
-DomainEvents --> markedAggregates:push(aggregate: AggregateRoot<any>)
-```
-
-</div>
-
-![](firstDiagram.svg)
+![](docs/create-post.svg)
 
 ### Demo 
 
